@@ -10,15 +10,34 @@
                     New Product
                 </div>
             <div class="panel-body">
-                {{--Form to add new product--}}
-                @if(Session::has('success'))
-                    <div class="alert-box success">
-                        <h2>{!! Session::get('success') !!}</h2>
+                {!! Form::open(array('url'=>'apply/multiple_upload','method'=>'POST','files'=>true)) !!}
+                {!! Form::file('images[]', array('multiple'=>true)) !!}
+                <div class="text-content">
+                    <div class="span7 offset1">
+                        @if(Session::has('success'))
+                            <div class="alert-box success">
+                                <h2>{!! Session::get('success') !!}</h2>
+                            </div>
+                            @endif
+                        <div class="secure">Upload form</div>
+                        {!! Form::open(array('url'=>'apply/multiple_upload','method'=>'POST','files'=>true) !!}
+                        <div class="control-group">
+                            <div class="controls">
+                                {!! Form::file('images[]',array('multiple'=>true)) !!}
+                                <p class="errors">{!! $errors->first('images') !!}</p>
+                                @if(Session::has('error'))
+                                    <p class="errors">{!! Session::get('error') !!}</p>
+                                    @endif
+                            </div>
+                        </div>
+                        {!! Form::submit('Submit',array('class'=>'send-btn')) !!}
+                        {!! Form::close() !!}
                     </div>
-                @endif
-                {!! Form::open(array('url'=>'/products','method'=>'POST', 'files'=>true,'class'=>'form-horizontal')) !!}
+                </div>
 
-               {{-- <form action="/products" method="post" class="form-horizontal" enctype="multipart/form-data">--}}
+
+
+                <form action="/products" method="post" class="form-horizontal" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="product-name" class="col-sm-3 control-label"> Product name</label>
@@ -41,7 +60,6 @@
                                 @endforeach
                             </select>                        </div>
                     </div>
-                {{--
                     <div class="form-group">
                         <label for="userfile">Image File</label>
                         <input type="file" class="form-control" name="userfile">
@@ -55,32 +73,15 @@
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description"></textarea>
-                    </div>--}}
-                {{--new upload form --}}
-                <div class="control-group">
-                    <div class="controls">
-                        {!! Form::file('images[]', array('multiple'=>true)) !!}
-                        <p class="errors">{!!$errors->first('images')!!}</p>
-                        @if(Session::has('error'))
-                            <p class="errors">{!! Session::get('error') !!}</p>
-                        @endif
                     </div>
-                </div>
-                {{--End upload --}}
-                  {{--  <div>
+                    <div>
                         <div class="col-sm-offset-3 col-sm-6">
                             <button type="submit" class="btn btn-default">
                                 <i class="fa fa-plus"></i>Add product
                             </button>
                         </div>
                     </div>
-                </form>--}}
-                <div>
-                    <div class="col-sm-offset-3 col-sm-6">
-                {!! Form::submit('Submit', array('class'=>'btn btn-default')) !!}
-                {!! Form::close() !!}
-
-                {{--End Form--}}
+                </form>
             </div>
 
                 <!-- Display Product list-->
