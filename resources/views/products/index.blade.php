@@ -55,6 +55,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="product-colors" class="col-sm-3 control-label"> Product Color</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="colors" id="colors" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="categories" class="col-sm-3" id="categories">Categories</label>
                         <div class="col-sm-6">
                             @foreach($categoriesList as $category)
