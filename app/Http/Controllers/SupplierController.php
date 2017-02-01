@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Supplier;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\File;
 class SupplierController extends Controller
 {
 
@@ -15,8 +15,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers1=Supplier::get();
-        return view('suppliers.index',['suppliers1'=>$suppliers1]);
+        $suppliers=Supplier::get();
+        return view('suppliers.index',['suppliers'=>$suppliers]);
     }
 
     /**
@@ -38,10 +38,13 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $supplier = new Supplier;
-        $supplier->name=$request->name;
-        $supplier->web=$request->web;
+        $supplier->name     = $request->name;
+        $supplier->web      = $request->web;
+        $supplier->person   = $request->person;
+        $supplier->phone    = $request->phone;
+        $supplier->email    = $request->email;
         $supplier->save();
-        return redirect('/suppliers');
+        return redirect('/suppliers/');
     }
 
     /**
@@ -57,15 +60,6 @@ class SupplierController extends Controller
 
     }
 
-    public function showProducts(Supplier $supplier){
-        /* $products=
-         $products = Product::where('supplier_id', $request->supplier()->id)->get();
-
-         return view('tasks.index', [
-             'tasks' => $tasks,
-         ]);*/
-
-    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -74,7 +68,8 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        $supplier   = Supplier::findOrFail($id);
+        return view('suppliers.edit',['supplier'=>$supplier]);
     }
 
     /**
@@ -86,7 +81,14 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $supplier = Supplier::findOrFail($id);
+        $supplier->name     = $request->name;
+        $supplier->web      = $request->web;
+        $supplier->person   = $request->person;
+        $supplier->phone    = $request->phone;
+        $supplier->email    = $request->email;
+        $supplier->save();
+        return redirect('/suppliers/edit/'.$id);
     }
 
     /**
@@ -97,7 +99,16 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        Supplier::findOrFail($id)->delete();
+        $supplier= Supplier::find($id);
+        foreach ($supplier->products()->get() as $product){
+            foreach ($product->images()->get() as $image){
+                $file=$image->file;
+                File::delete($file);
+            }
+            $product->images()->delete();
+        }
+        $supplier->products()->delete();
+        $supplier->delete();
         return redirect('/suppliers');
     }
 }

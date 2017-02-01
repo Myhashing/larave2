@@ -10,6 +10,7 @@
                     New Supplier
                 </div>
             <div class="panel-body">
+                {{--Add new supplier form--}}
                 <form action="/suppliers" method="post" class="form-horizontal">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -24,6 +25,24 @@
                             <input type="text" name="web" id="supplier-web" class="form-control">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="supplier-person" class="col-sm-3 control-label"> Supplier's Contact Person</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="person" id="supplier-person" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="supplier-phone" class="col-sm-3 control-label"> Supplier phone: </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="phone" id="supplier-phone" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="supplier-email" class="col-sm-3 control-label"> Supplier email: </label>
+                        <div class="col-sm-6">
+                            <input type="email" name="email" id="supplier-email" class="form-control">
+                        </div>
+                    </div>
                     <div>
                         <div class="col-sm-offset-3 col-sm-6">
                             <button type="submit" class="btn btn-default">
@@ -35,7 +54,7 @@
             </div>
 
                 <div>
-                    @if(count($suppliers1)>0)
+                    @if(count($suppliers)>0)
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Current Supplier List
@@ -46,7 +65,7 @@
                                 <th>Supplier</th>
                                 </thead>
                                 <tbody>
-                        @foreach($suppliers1 as $supplier)
+                        @foreach($suppliers as $supplier)
                             <tr>
                                 <!-- Supplier Name -->
                                 <td class="table-text">

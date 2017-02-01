@@ -4,7 +4,7 @@
 
     <!-- Bootstrap Boilerplate... -->
     <div class="container">
-        <div class="col-sm-offset-2 col-sm-8">
+        <div class="col-sm-offset-0 col-sm-14">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     New Product
@@ -17,11 +17,10 @@
                     </div>
                 @endif
                 {!! Form::open(array('url'=>'/products','method'=>'POST', 'files'=>true,'class'=>'form-horizontal')) !!}
-
-               {{-- <form action="/products" method="post" class="form-horizontal" enctype="multipart/form-data">--}}
-                    {{ csrf_field() }}
+                 {{ csrf_field() }}
+                {{-- Form for inseret new product : name,web_link,price,moq,sample,categories,supplier,images--}}
                     <div class="form-group">
-                        <label for="product-name" class="col-sm-3 control-label"> Product name</label>
+                        <label for="product-name" class="col-sm-3 control-label"> Product SKU</label>
                         <div class="col-sm-6">
                             <input type="text" name="name" id="product-name" class="form-control">
                         </div>
@@ -33,59 +32,69 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="product-price" class="col-sm-3 control-label"> Price</label>
+                        <div class="col-sm-1">
+                            <input type="text" name="price" id="price" class="form-control">
+                        </div>
+                        <label for="product-moq" class="col-sm-1 control-label"> MOQ</label>
+                        <div class="col-sm-1">
+                            <input type="text" name="moq" id="moq" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <label for="product-sample" class="col-sm-3 control-label"> Sample </label>
+                    <div class="col-sm-1">
+                        <label class="radio"><input type="radio" name="sample" id="sample" value=true>Yes</label>
+                        <label class="radio"><input type="radio" name="sample" id="sample" value=false>No</label>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-remarks" class="col-sm-3 control-label"> Product remarks</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="remarks" id="remarks" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="categories" class="col-sm-3" id="categories">Categories</label>
+                        <div class="col-sm-6">
+                            @foreach($categoriesList as $category)
+                            <input type="checkbox" name="categories[]" multiple class="form-control" id="categories[]"
+                                   value="{{ $category['id'] }}">{{ $category['name'] }}
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="supplier-name" class="col-sm-3" id="supplier-name">Suppler name</label>
                         <div class="col-sm-6">
                             <select name="supplier[]" multiple class="form-control" id="supplier-list">
                                 @foreach($supplierList as $supplier)
                                     <option value="{{ $supplier['id'] }}" {{ $supplier['selected'] }}>{{ $supplier['name'] }}</option>
                                 @endforeach
-                            </select>                        </div>
-                    </div>
-                {{--
-                    <div class="form-group">
-                        <label for="userfile">Image File</label>
-                        <input type="file" class="form-control" name="userfile">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="caption">Caption</label>
-                        <input type="text" class="form-control" name="caption" value="">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" name="description"></textarea>
-                    </div>--}}
-                {{--new upload form --}}
-                <div class="control-group">
-                    <div class="controls">
-                        {!! Form::file('images[]', array('multiple'=>true)) !!}
-                        <p class="errors">{!!$errors->first('images')!!}</p>
-                        @if(Session::has('error'))
-                            <p class="errors">{!! Session::get('error') !!}</p>
-                        @endif
-                    </div>
-                </div>
-                {{--End upload --}}
-                  {{--  <div>
-                        <div class="col-sm-offset-3 col-sm-6">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fa fa-plus"></i>Add product
-                            </button>
+                            </select>
                         </div>
                     </div>
-                </form>--}}
-                <div>
-                    <div class="col-sm-offset-3 col-sm-6">
-                {!! Form::submit('Submit', array('class'=>'btn btn-default')) !!}
-                {!! Form::close() !!}
 
-                {{--End Form--}}
-            </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            {!! Form::file('images[]', array('multiple'=>true)) !!}
+                            <p class="errors">{!!$errors->first('images')!!}</p>
+                            @if(Session::has('error'))
+                                <p class="errors">{!! Session::get('error') !!}</p>
+                            @endif
+                        </div>
+                    </div>
 
-                <!-- Display Product list-->
-                <div>
-                    @if(count($productList)>0)
+                    <div>
+                        <div class="col-sm-offset-3 col-sm-6">
+                          {!! Form::submit('Submit', array('class'=>'btn btn-default')) !!}
+                          {!! Form::close() !!}
+
+                          {{--End Form--}}
+                        </div>
+                    </div>
+                    <!-- Display Product list-->
+                    <div>
+                     @if(count($productList)>0)
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Current Product List
@@ -93,70 +102,80 @@
                         <div class="panel-body">
                             <table class="table table-striped product-table">
                                 <thead>
-                                <th>Product</th>
+                                    <th>Product</th>
                                 </thead>
                                 <tbody>
                                 <!-- Display single product details-->
-                        @foreach($productList as $product)
-                            <tr>
+                                @foreach($productList as $product)
+
+                                <tr>
+                                    <td class="table-text">
+                                    </td>
                                 <!-- Product Name -->
-                                <td class="table-text">
-                                    <div>Product name : {{ $product->name }}</div>
-                                </td>
-                                <td class="table-text">
-                                   Product Web:  {{ $product->web_link }}
-                                </td>
-                                {{--TODO: clean up code and call right supplier. dont load full list--}}
+                                    <td class="table-text">
+                                        Product name : {{ $product->name }}
+                                    <br><br>
+                                       Product Web:  {{ $product->web_link }}
+                                    <br><br>
+                                    {{--TODO: clean up code and call right supplier. dont load full list--}}
 
-                                <td class="table-text">
-                                    @foreach($supplierList as $supplier)
-                                        @if($supplier->id=== $product->supplier_id)
-                                            supplier name:  {{ $supplier->name }}
-                                            @endif
+                                        @foreach($supplierList as $supplier)
+                                            @if($supplier->id=== $product->supplier_id)
+                                                supplier name:  {{ $supplier->name }}
+                                                @endif
                                         @endforeach
-                                </td>
-                                {{--show one photo as thumbnail--}}
-                                {{--TODO : fix the href to open all photos--}}
+                                    </td>
+                                    {{--show one photo as thumbnail--}}
+                                    {{--TODO : fix the href to open all photos--}}
 
-                                <td>
-                                    <a class="thumbnail" href="{{asset($product->images[0]->file)}}">
-                                        <img class="img-responsive" src="{{asset($product->images[0]->file)}}" alt="">
-                                    </a>
-                                </td>
-                                <td class="table-text">
-                                    Product images count:  {{ count($product->images) }}
-                                </td>
+                                    <td>
+                                        <a class="thumbnail" href="{{asset($product->images[0]->file)}}">
+                                            <img class="img-responsive" src="{{asset($product->images[0]->file)}}" alt="">
+                                        </a>
+                                    </td>
 
-                                <!-- Product show Button-->
-                                <td>
-                                    <form action="/products/{{ $product->id }}" method="get">
-                                        {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-info">
-                                            <i class="fa fa-btn fa-box"></i>
-                                            show Product</button>
-                                    </form>
-                                </td>
-                                <!-- Product Delete Button-->
-                                <td>
-                                    <form action="/products/{{ $product->id }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
+                                    <!-- Product show Button-->
+                                    <td>
+                                        <form action="/products/{{ $product->id }}" method="get">
+                                            {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-info">
+                                                <i class="fa fa-btn fa-box"></i>
+                                                show Product</button>
+                                        </form>
+                                        <br>
+                                        {{--Edit button--}}
 
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-btn fa-trash"></i>
-                                            Delete Product</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <form action="/products/edit/{{ $product->id }}" method="get">
+                                            {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-info">
+                                                <i class="fa fa-btn fa-box"></i>
+                                                Edit Product</button>
+                                        </form>
+                                        <br>
+                                   <!-- Product Delete Button-->
+                                        <form action="/products/{{ $product->id }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-btn fa-trash"></i>
+                                                Delete Product</button>
+                                        </form>
+                                        <br>
+                                        {{--image count in gallery--}}
+                                        Product images count:{{ count($product->images) }}
+                                    </td>
+                                </tr>
+                                    @endforeach
                                 </tbody>
-                    @else
-                    <div>No resutls</div>
-                    @endif
-                    </table>
+                                    @else
+                                    <div>No resutls</div>
+                                    @endif
+                                </table>
+                            </div>
                         </div>
-                        </div>
-                </div>
+                    </div>
+            </div>
             </div>
         </div>
     </div>

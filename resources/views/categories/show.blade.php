@@ -10,54 +10,35 @@
                 <div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Current Supplier Profile
+                                Current Category Profile
                             </div>
                         <div class="panel-body">
-                            <table class="table table-striped supplier-table">
+                            <table class="table table-striped category-table">
                                 <thead>
-                                <th>Supplier</th>
+                                <th>Category</th>
                                 </thead>
                                 <tbody>
 
                             <tr>
                                 <!-- Supplier Name -->
                                 <tr class="table-text">
-                                <td>Supplier name :</td>
-                                <td>{{ $supplier->name }}</td>
+                                <td>Category name :</td>
+                                <td>{{ $category->name }}</td>
                                 </tr>
-                                <tr class="table-text">
-                                    <td>Supplier Web:</td>
-                                    <td>{{ $supplier->web }}</td>
-                                </tr>
-                                <!-- Supplier Name -->
-                                <tr class="table-text">
-                                    <td>Supplier Person :</td>
-                                    <td>{{ $supplier->person }}</td>
-                                </tr>
-                                <tr class="table-text">
-                                    <td>Supplier phone:</td>
-                                    <td>{{ $supplier->phone }}</td>
-                                </tr>
-                                <!-- Supplier Name -->
-                                <tr class="table-text">
-                                    <td>Supplier email :</td>
-                                    <td>{{ $supplier->email }}</td>
-                                </tr>
-
                             </tr>
-                            <!-- Supplier Show Button-->
+                            <!-- Category Show Button-->
                             <td>
-                                <form action="/suppliers/edit/{{ $supplier->id }}" method="get">
+                                <form action="/categories/edit/{{ $category->id }}" method="get">
                                     {{ csrf_field() }}
                                     {{ method_field('show') }}
                                     <button type="submit" class="btn btn-info">
-                                        Edit Supplier
+                                        Edit Category
                                     </button>
                                 </form>
                             </td>
                             <!-- Supplier Delete Button-->
                             <td>
-                                <form action="/suppliers/{{ $supplier->id }}" method="POST">
+                                <form action="/categories/{{ $category->id }}" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
@@ -76,17 +57,13 @@
             </div>
         </div>
         <!-- PRODUCTS CATALOG-->
-        @foreach($supplier->products as $product)
+        @foreach($category->products as $product)
         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="/products/edit/{{ $product->id }}">
                 <img class="img-responsive" src="{{asset($product->images[0]->file)}}" alt="">
             </a>
             <td class="table-text">
             Product Name: {{$product->name  }}
-            </td>
-            <br>
-            <td class="table-text">
-                Product Name: {{$product->web_link  }}
             </td>
             <br>
         </div>

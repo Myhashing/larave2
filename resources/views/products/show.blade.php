@@ -20,55 +20,73 @@
                                 <tbody>
                                 <tr>
                                     <!-- Product Name -->
-                                    <td class="table-text">
-                                        <div>Product name : {{ $product->name }}</div>
-                                    </td>
-                                    <td class="table-text">
-                                       <div> Product Web:  {{ $product->web_link }}</div>
-                                    </td>
-                                    {{--add new image--}}
-
-                                <!-- related products Show Button
-                                <td>
-                                    <form action="/suppliers/products/" method="post">
-
-                                        <button type="submit" class="btn btn-info">
-
-                                            show related products</button>
-                                    </form>
-                                </td> -->
-
+                                    <tr class="table-text">
+                                    <td>Product name :</td>
+                                    <td>{{ $product->name }}</td>
+                                    </tr>
+                                    <tr class="table-text">
+                                        <td>   Product Web:</td>
+                                        <td>{{ $product->web_link }}</td>
+                                    </tr>
+                                    <tr class="table-text">
+                                        <td>   Product Price:</td>
+                                        <td>{{ $product->price }}</td>
+                                    </tr>
+                                <tr class="table-text">
+                                    <td>   Product MOQ:</td>
+                                    <td>{{ $product->moq }}</td>
                                 </tr>
+                                <tr class="table-text">
+                                    <td>   Sample:</td>
+                                    <td>{{ $product->sample }}</td>
+                                </tr>
+                                <tr class="table-text">
+                                    <td>   Supplier:</td>
+                                    <td>{{ $supplier->name }}</td>
+                                </tr>
+                                @foreach($product->remarks as $remark)
+                                <tr class="table-text">
+                                    <td>   Product Remaks:</td>
+                                    <td> {{ $remark->remark }}</td>
+                                </tr>
+                                @endforeach
+                                <tr class="table-text">
+                                    <td>   Product Categories:</td>
+                                    <td>
+                                    @foreach($product->categories as $category)
+                                       {{$category->name}},
+                                    @endforeach
+                                    </td>
+                                </tr>
+
+
                                 </tbody>
                             </table>
+                            {{--Edit button--}}
+                            <table>
+                                <tr>
+                                    <form action="/products/edit/{{ $product->id }}" method="get">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-info">
+                                            <i class="fa fa-btn fa-box"></i>
+                                            Edit Product</button>
+                                    </form>
+                                </tr>
+                                
+                                <tr>
+                                    <!-- Product Delete Button-->
+                                    <form action="/products/{{ $product->id }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
 
-
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fa fa-btn fa-trash"></i>
+                                            Delete Product</button>
+                                    </form>
+                                </tr>
+                            </table>
                         </div>
-                        @include('products.error-notification')
-                        {!! Form::open(['url'=>'/image', 'method'=>'POST', 'files'=>'true']) !!}
 
-                        <div class="form-group">
-                            <label for="userfile">Image File</label>
-                            <input type="file" class="form-control" name="userfile">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="caption">Caption</label>
-                            <input type="text" class="form-control" name="caption" value="">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" name="description"></textarea>
-                        </div>
-                        {{--TODO send the product id into post variable --}}
-
-                        <input class="form-control" name="product_id" value="{{$product->id}}">
-
-                        <button type="submit" class="btn btn-primary">Upload</button>
-                        <a href="{{ url('/image') }}" class="btn btn-warning">Cancel</a>
-
-                        {!! Form::close() !!}
                     </div>
 
                 </div>

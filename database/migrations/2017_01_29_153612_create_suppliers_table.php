@@ -17,6 +17,9 @@ class CreateSuppliersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('web');
+            $table->string('person');
+            $table->string('phone');
+            $table->string('email');
             $table->timestamps();
         });
     }

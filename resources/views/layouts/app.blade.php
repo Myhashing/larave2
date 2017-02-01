@@ -49,6 +49,9 @@
                 <li>
                     <a href="/products">Products</a>
                 </li>
+                <li>
+                    <a href="/categories">Category</a>
+                </li>
 
             </ul>
         </div>
