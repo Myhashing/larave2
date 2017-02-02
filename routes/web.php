@@ -11,8 +11,16 @@
 |
 */
 
+use App\Category;
+use App\Product;
+use App\Supplier;
+
 Route::get('/', function () {
-    return view('welcome');
+    $productList    =   Product::get();
+    $supplierList   =   Supplier::get();
+    $categoriesList =   Category::get();
+    /*TODO: Set validation for the all lists*/
+    return view('index2',['productList'=> $productList,'supplierList'=>$supplierList,'categoriesList'=>$categoriesList]);
 });
 
 

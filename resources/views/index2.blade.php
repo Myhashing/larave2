@@ -1,99 +1,8 @@
 @extends('layouts.layout')
 @section('content')
-    <div class="col-sm-9">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                New Product
-            </div>
-            <div class="panel-body">
-                {{--Form to add new product--}}
-                @if(Session::has('success'))
-                    <div class="alert-box success">
-                        <h2>{!! Session::get('success') !!}</h2>
-                    </div>
-                @endif
-                {!! Form::open(array('url'=>'/products','method'=>'POST', 'files'=>true,'class'=>'form-horizontal')) !!}
-                {{ csrf_field() }}
-                {{-- Form for inseret new product : name,web_link,price,moq,sample,categories,supplier,images--}}
-                <div class="form-group">
-                    <label for="product-name" class="col-sm-3 control-label"> Product SKU</label>
-                    <div class="col-sm-6">
-                        <input type="text" name="name" id="product-name" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="product-web" class="col-sm-3 control-label"> Product Web</label>
-                    <div class="col-sm-6">
-                        <input type="text" name="web_link" id="product-web" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="product-price" class="col-sm-3 control-label"> Price</label>
-                    <div class="col-sm-1">
-                        <input type="text" name="price" id="price" class="form-control">
-                    </div>
-                    <label for="product-moq" class="col-sm-1 control-label"> MOQ</label>
-                    <div class="col-sm-1">
-                        <input type="text" name="moq" id="moq" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="product-sample" class="col-sm-3 control-label"> Sample </label>
-                    <div class="col-sm-1">
-                        <label class="radio"><input type="radio" name="sample" id="sample" value=true>Yes</label>
-                        <label class="radio"><input type="radio" name="sample" id="sample" value=false>No</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="product-remarks" class="col-sm-3 control-label"> Product remarks</label>
-                    <div class="col-sm-6">
-                        <input type="text" name="remarks" id="remarks" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="product-colors" class="col-sm-3 control-label"> Product Color</label>
-                    <div class="col-sm-6">
-                        <input type="text" name="colors" id="colors" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="categories" class="col-sm-3" id="categories">Categories</label>
-                    <div class="col-sm-6">
-                        @foreach($categoriesList as $category)
-                            <input type="checkbox" name="categories[]" multiple class="form-control" id="categories[]"
-                                   value="{{ $category['id'] }}">{{ $category['name'] }}
-                        @endforeach
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="supplier-name" class="col-sm-3" id="supplier-name">Suppler name</label>
-                    <div class="col-sm-6">
-                        <select name="supplier[]" multiple class="form-control" id="supplier-list">
-                            @foreach($supplierList as $supplier)
-                                <option value="{{ $supplier['id'] }}" {{ $supplier['selected'] }}>{{ $supplier['name'] }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
 
-                <div class="control-group">
-                    <div class="controls">
-                        {!! Form::file('images[]', array('multiple'=>true)) !!}
-                        <p class="errors">{!!$errors->first('images')!!}</p>
-                        @if(Session::has('error'))
-                            <p class="errors">{!! Session::get('error') !!}</p>
-                        @endif
-                    </div>
-                </div>
 
-                <div>
-                    <div class="col-sm-offset-3 col-sm-6">
-                        {!! Form::submit('Submit', array('class'=>'btn btn-default')) !!}
-                        {!! Form::close() !!}
-
-                        {{--End Form--}}
-                    </div>
-                </div>
+            <div class="col-sm-9">
                 <!-- Display Product list-->
                 <div>
                     @if(count($productList)>0)
@@ -178,8 +87,5 @@
                         </div>
                 </div>
             </div>
-        </div>
-    </div>
-
 
 @endsection
