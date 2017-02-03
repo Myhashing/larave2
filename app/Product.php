@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable=['name','supplier_id'];
+    protected $fillable=['name','supplier_id','web_link','sample','price','moq'];
+
 
     public function suppliers(){
         return $this->belongsTo('App\Supplier','foreign_key');

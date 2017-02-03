@@ -8,6 +8,6 @@ class Order extends Model
 {
     public $fillable=['product_id','quantity','order_date'];
     public function products(){
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo('App\Product','foreign_key');
     }
 }

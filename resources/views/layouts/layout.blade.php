@@ -45,6 +45,7 @@
                 <li><a href="/suppliers">Supplier</a></li>
                 <li><a href="/products">Product</a></li>
                 <li><a href="/categories">Categories</a></li>
+                <li><a href="/orders">Order</a> </li>
             </ul><br>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search Blog..">
@@ -58,9 +59,7 @@
 @yield('content')
     </div>
 </div>
-<footer class="container-fluid">
-    <p><a href="suppliers" >Supplier</a></p>
-</footer>
+
 
 </body>
 </html>
