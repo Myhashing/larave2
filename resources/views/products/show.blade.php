@@ -6,7 +6,6 @@
                 Current Product Profile
             </div>
             {{--TODO : make the photo gallery and fix the lightbox--}}
-
             <div class="panel-body">
                 <table class="table table-striped supplier-table">
                     <thead>
@@ -20,33 +19,38 @@
                         <td>{{ $product->name }}</td>
                     </tr>
                     <tr class="table-text">
-                        <td>   Product Web:</td>
+                        <td> Product Web:</td>
                         <td>{{ $product->web_link }}</td>
                     </tr>
                     <tr class="table-text">
-                        <td>   Product Price:</td>
+                        <td> Product Price:</td>
                         <td>{{ $product->price }}</td>
                     </tr>
                     <tr class="table-text">
-                        <td>   Product MOQ:</td>
+                        <td> Product MOQ:</td>
                         <td>{{ $product->moq }}</td>
                     </tr>
                     <tr class="table-text">
-                        <td>   Sample:</td>
+                        <td> Sample:</td>
                         <td>{{ $product->sample }}</td>
                     </tr>
                     <tr class="table-text">
-                        <td>   Supplier:</td>
+                        <td> Sample:</td>
+                        {{dd($product->Colors()->get(1))}}
+                        <td>{{ $product->Colors()->color }}</td>
+                    </tr>
+                    <tr class="table-text">
+                        <td> Supplier:</td>
                         <td>{{ $supplier->name }}</td>
                     </tr>
                     @foreach($product->remarks as $remark)
                         <tr class="table-text">
-                            <td>   Product Remaks:</td>
+                            <td> Product Remaks:</td>
                             <td> {{ $remark->remark }}</td>
                         </tr>
                     @endforeach
                     <tr class="table-text">
-                        <td>   Product Categories:</td>
+                        <td> Product Categories:</td>
                         <td>
                             @foreach($product->categories as $category)
                                 {{$category->name}},
@@ -64,7 +68,8 @@
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-info">
                                 <i class="fa fa-btn fa-box"></i>
-                                Edit Product</button>
+                                Edit Product
+                            </button>
                         </form>
                     </tr>
 
@@ -76,23 +81,22 @@
 
                             <button type="submit" class="btn btn-danger">
                                 <i class="fa fa-btn fa-trash"></i>
-                                Delete Product</button>
+                                Delete Product
+                            </button>
                         </form>
                     </tr>
                 </table>
             </div>
 
         </div>
-    <!-- PRODUCTS CATALOG-->
+        <!-- PRODUCTS CATALOG-->
         <div id="gallery-images">
             @foreach($product->images as $image)
                 <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="{{asset($image->file)}}"  data-lightbox="roadtrip">
-                        <img src="{{asset($image->file)}}" >
-
+                    <a class="thumbnail" target="_blank" href="{{asset($image->file)}}" data-lightbox="roadtrip">
+                        <img src="{{asset($image->file)}}">
                     </a>
                 </div>
-
             @endforeach
         </div>
     </div>

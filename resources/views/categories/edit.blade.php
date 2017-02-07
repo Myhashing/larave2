@@ -14,19 +14,22 @@
                         </div>
                     @endif
                     {{--TODO: add category edit to form--}}
-                    <form action="/categories/edit/{{$category->id}}" method="post" files="true" class="form-horizontal" enctype="multipart/form-data">
+                    <form action="/categories/edit/{{$category->id}}" method="post" files="true" class="form-horizontal"
+                          enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="category-name" class="col-sm-3 control-label"> Category name</label>
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="category-name" class="form-control" value="{{$category->name}}">
+                                <input type="text" name="name" id="category-name" class="form-control"
+                                       value="{{$category->name}}">
                             </div>
                         </div>
                         <div>
                             <div class="col-sm-offset-3 col-sm-6">
                                 <button type="submit" class="btn btn-info">
                                     <i class="fa fa-btn fa-box"></i>
-                                    Edit Category</button>
+                                    Edit Category
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -35,7 +38,8 @@
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-success">
                             <i class="fa fa-btn fa-info"></i>
-                            Back to Category</button>
+                            Back to Category
+                        </button>
                     </form>
 
                 </div>

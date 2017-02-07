@@ -50,7 +50,8 @@
 
                                             <button type="submit" class="btn btn-info">
 
-                                                show category</button>
+                                                show category
+                                            </button>
                                         </form>
                                     </td>
                                     <!-- Category Delete Button-->
@@ -61,7 +62,8 @@
 
                                             <button type="submit" class="btn btn-danger">
                                                 <i class="fa fa-btn fa-trash"></i>
-                                                Delete Category</button>
+                                                Delete Category
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

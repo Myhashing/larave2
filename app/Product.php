@@ -6,26 +6,36 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable=['name','supplier_id','web_link','sample','price','moq'];
+    protected $fillable = ['name', 'supplier_id', 'web_link', 'sample', 'price', 'moq'];
 
 
-    public function suppliers(){
-        return $this->belongsTo('App\Supplier','foreign_key');
+    public function suppliers()
+    {
+        return $this->belongsTo('App\Supplier', 'foreign_key');
     }
 
-    public function images(){
+    public function images()
+    {
         return $this->hasMany(Image::class);
     }
-    public function orders(){
+
+    public function orders()
+    {
         return $this->hasMany(Order::class);
     }
-    public function remarks(){
+
+    public function remarks()
+    {
         return $this->hasMany(Remark::class);
     }
-    public function categories(){
+
+    public function categories()
+    {
         return $this->belongsToMany(Category::class)->withTimestamps();
     }
-    public function colors(){
+
+    public function colors()
+    {
         return $this->hasMany(Color::class);
     }
 }

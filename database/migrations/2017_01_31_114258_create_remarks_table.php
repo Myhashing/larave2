@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateRemarksTable extends Migration
 {
@@ -16,7 +16,7 @@ class CreateRemarksTable extends Migration
         Schema::create('remarks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id');
-            $table->text('remark');
+            $table->text('remark')->nullable();
             $table->timestamps();
         });
     }

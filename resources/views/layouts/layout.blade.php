@@ -9,7 +9,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
         /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-        .row.content {height: 1500px}
+        .row.content {
+            height: 1500px
+        }
 
         /* Set gray background color and 100% height */
         .sidenav {
@@ -30,7 +32,10 @@
                 height: auto;
                 padding: 15px;
             }
-            .row.content {height: auto;}
+
+            .row.content {
+                height: auto;
+            }
         }
     </style>
 </head>
@@ -45,8 +50,9 @@
                 <li><a href="/suppliers">Supplier</a></li>
                 <li><a href="/products">Product</a></li>
                 <li><a href="/categories">Categories</a></li>
-                <li><a href="/orders">Order</a> </li>
-            </ul><br>
+                <li><a href="/orders">Order</a></li>
+            </ul>
+            <br>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search Blog..">
                 <span class="input-group-btn">
@@ -56,7 +62,7 @@
         </span>
             </div>
         </div>
-@yield('content')
+        @yield('content')
     </div>
 </div>
 

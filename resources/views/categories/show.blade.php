@@ -37,7 +37,8 @@
 
                             <button type="submit" class="btn btn-danger">
                                 <i class="fa fa-btn fa-trash"></i>
-                                Delete Supplier</button>
+                                Delete Supplier
+                            </button>
                         </form>
                     </td>
                     </tbody>

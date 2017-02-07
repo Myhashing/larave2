@@ -36,6 +36,11 @@
                         <td>Supplier email :</td>
                         <td>{{ $supplier->email }}</td>
                     </tr>
+                    <!-- Supplier Remarks -->
+                    <tr class="table-text">
+                        <td>Supplier Remarks :</td>
+                        <td>{{ $supplier->remarks }}</td>
+                    </tr>
 
                     </tr>
                     <!-- Supplier Show Button-->
@@ -56,7 +61,8 @@
 
                             <button type="submit" class="btn btn-danger">
                                 <i class="fa fa-btn fa-trash"></i>
-                                Delete Supplier</button>
+                                Delete Supplier
+                            </button>
                         </form>
                     </td>
                     </tbody>

@@ -1,4 +1,4 @@
- @extends('layouts.layout')
+@extends('layouts.layout')
 @section('content')
     <div class="col-sm-9">
         <div class="panel panel-default">
@@ -12,20 +12,23 @@
                         <h2>{!! Session::get('success') !!}</h2>
                     </div>
                 @endif
-                <form action="/products/edit/{{$product->id}}" method="post" files="true" class="form-horizontal" enctype="multipart/form-data">
+                <form action="/products/edit/{{$product->id}}" method="post" files="true" class="form-horizontal"
+                      enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{--Name--}}
                     <div class="form-group">
                         <label for="product-name" class="col-sm-3 control-label"> Product SKU</label>
                         <div class="col-sm-6">
-                            <input type="text" name="name" id="product-name" class="form-control" value="{{$product->name}}">
+                            <input type="text" name="name" id="product-name" class="form-control"
+                                   value="{{$product->name}}">
                         </div>
                     </div>
                     {{--Web--}}
                     <div class="form-group">
                         <label for="product-web" class="col-sm-3 control-label"> Product Web</label>
                         <div class="col-sm-6">
-                            <input type="text" name="web_link" id="product-web" class="form-control" value="{{$product->web_link}}">
+                            <input type="text" name="web_link" id="product-web" class="form-control"
+                                   value="{{$product->web_link}}">
                         </div>
                     </div>
                     {{--Price--}}
@@ -43,21 +46,18 @@
                     <div class="form-group">
                         <label for="product-sample" class="col-sm-3 control-label"> Sample </label>
                         <div class="col-sm-1">
-                            <label class="radio"><input type="radio" name="sample" id="sample"
-                                                        @if($product->sample == "on")
-                                                        checked
+                            {{dd($product->sample)}}
+                            <label class="radio"><input type="radio" name="sample" id="sample"@if($product->sample == "on")checked
                                         @endif>Yes</label>
-                            <label class="radio"><input type="radio" name="sample" id="sample">No</label>
+                            <label class="radio"><input type="radio" name="sample" id="sample"@if($product->sample == "off")checked
+                                        @endif>No</label>
                         </div>
                     </div>
                     {{--Color--}}
                     <div class="form-group">
                         <label for="product-colors" class="col-sm-3 control-label"> Product Color</label>
                         <div class="col-sm-6">
-                            <input type="text" name="colors" id="colors" class="form-control" value="
-                                                                @foreach($product->Colors as $color)
-                                                                {{$color->color}};
-                                                                @endforeach">
+                            <input type="text" name="colors" id="colors" class="form-control" value="@foreach($product->Colors as $color){{$color->color}};@endforeach">
                         </div>
                     </div>
                     {{--Remarks--}}
@@ -90,7 +90,8 @@
                         <label for="categories" class="col-sm-3" id="categories">Categories</label>
                         <div class="col-sm-6">
                             @foreach($categoriesList as $category)
-                                <input type="checkbox" name="categories[]" multiple class="form-control" id="categories[]"
+                                <input type="checkbox" name="categories[]" multiple class="form-control"
+                                       id="categories[]"
                                        value="{{ $category['id'] }}"
                                        @foreach($product->categories as $selectedCategory)
                                        @if($category->name == $selectedCategory->name )
@@ -111,27 +112,30 @@
                     <div class="col-sm-offset-3 col-sm-6">
                         <button type="submit" class="btn btn-info">
                             <i class="fa fa-btn fa-box"></i>
-                            Edit Product</button>
+                            Edit Product
+                        </button>
                     </div>
                 </form>
                 {{--End Form--}}
-                <form action="/products/{{ $product->id }}" method="get">
+                <form action="/products" method="get">
                     {{ csrf_field() }}
                     <button type="submit" class="btn btn-success">
                         <i class="fa fa-btn fa-info"></i>
-                        Back to Product</button>
+                        Back to Product
+                    </button>
                 </form>
             </div>
         </div>
     {{--TODO : make the photo gallery and fix the lightbox--}}
     <!-- PRODUCTS CATALOG-->
-    <div id="gallery-images">
-        @foreach($product->images as $image)
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail" href="{{asset($image->file)}}"  data-lightbox="roadtrip">
-                    <img src="{{asset($image->file)}}" >
-                </a>
-            </div>
-        @endforeach
+        <div id="gallery-images">
+            @foreach($product->images as $image)
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="{{asset($image->file)}}">
+                        <img src="{{asset($image->file)}}">
+                    </a>
+                </div>
+            @endforeach
+        </div>
     </div>
 @endsection

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSuppliersTable extends Migration
 {
@@ -15,11 +15,12 @@ class CreateSuppliersTable extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('web');
             $table->string('person');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('phone')->unique();
+            $table->string('email')->unique();
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }
